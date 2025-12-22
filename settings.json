@@ -1,5 +1,5 @@
 {
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
 
   "permissions": {
     "deny": [
@@ -10,6 +10,21 @@
       "Read(./.git/**)",
       "Read(./build/**)",
       "Read(./dist/**)"
+    ]
+  },
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'file=$(jq -r \".tool_input.file_path\"); if [[ \"$file\" =~ \\.(clj|cljc)$ ]]; then ~/.claude/scripts/reload-backend.sh && sleep 2 && ~/.claude/scripts/capture-backend.sh 30; fi'",
+            "timeout": 120
+          }
+        ]
+      }
     ]
   }
 }

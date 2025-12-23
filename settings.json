@@ -3,13 +3,19 @@
 
   "permissions": {
     "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./secrets/**)",
-      "Read(./node_modules/**)",
-      "Read(./.git/**)",
-      "Read(./build/**)",
-      "Read(./dist/**)"
+      "Read(**/.env.*)",
+      "Read(**/.env)",
+      "Read(**/.git/**)",
+      "Read(**/.transcrypt_key.txt.asc)",
+      "Read(**/build/**)",
+      "Read(**/dist/**)",
+      "Read(**/encrypt-transcrypt-key)",
+      "Read(**/master_secret.txt)",
+      "Read(**/node_modules/**)",
+      "Read(**/secrets/**)",
+      "Read(**/zhdk_secrets.yml)",
+      "Read(**/test_claude_permission.txt)",
+      "Read(**/transcrypt)"
     ]
   },
 

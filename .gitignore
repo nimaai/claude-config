@@ -1,7 +1,8 @@
 debug/
 file-history/
 plans/
-plugins/
+plugins/*
+!plugins/leihs-release/
 projects/
 session-env/
 shell-snapshots/

@@ -37,55 +37,7 @@ else
   echo "Backend running - sending reload..."
   PORT=$(cat "$PROJECT_DIR/.nrepl-port")
 
-  # Using Python bencode (fast)
-  python3 -c "
-import socket
-import sys
-import re
-
-port = $PORT
-code = '(do (require \'clj-reload.core) (clj-reload.core/reload))'
-msg = f'd2:op4:eval4:code{len(code)}:{code}e'
-
-try:
-    s = socket.socket()
-    s.settimeout(5)
-    s.connect(('localhost', port))
-    s.send(msg.encode())
-
-    # Read all responses until done
-    responses = []
-    while True:
-        try:
-            chunk = s.recv(8192).decode('utf-8', errors='ignore')
-            if not chunk:
-                break
-            responses.append(chunk)
-            if 'status' in chunk and 'done' in chunk:
-                break
-        except:
-            break
-    s.close()
-
-    full_resp = ''.join(responses)
-
-    # Look for error/exception in response
-    if 'error' in full_resp or 'Exception' in full_resp or 'Error' in full_resp:
-        print('RELOAD ERRORS:', full_resp)
-        sys.exit(2)
-
-    # Extract value if present (bencode format: 5:valueNN:content)
-    value_match = re.search(r'5:value(\d+):', full_resp)
-    if value_match:
-        length = int(value_match.group(1))
-        start = value_match.end()
-        value = full_resp[start:start+length]
-        print('Reload result:', value)
-    else:
-        print('Reload OK')
-
-except Exception as e:
-    print(f'Connection error: {e}')
-    sys.exit(2)
-" 2>&1 || exit 2
+  # Use nrepl-eval script
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  "$SCRIPT_DIR/nrepl-eval.py" "$PORT" "(do (require 'clj-reload.core) (clj-reload.core/reload))" || exit 2
 fi

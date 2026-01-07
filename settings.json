@@ -20,6 +20,18 @@
   },
 
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'cmd=$(jq -r \".tool_input.command\"); if [[ \"$cmd\" =~ bin/rspec ]] && git diff --name-only | grep -q \"\\.(clj|cljc)$\"; then ~/.claude/scripts/reload-backend-test.sh; fi'",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",

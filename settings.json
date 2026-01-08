@@ -17,32 +17,5 @@
       "Read(**/test_claude_permission.txt)",
       "Read(**/transcrypt)"
     ]
-  },
-
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash -c 'cmd=$(jq -r \".tool_input.command\"); if [[ \"$cmd\" =~ bin/rspec ]] && git diff --name-only | grep -q \"\\.(clj|cljc)$\"; then ~/.claude/scripts/reload-backend-test.sh; fi'",
-            "timeout": 120
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash -c 'file=$(jq -r \".tool_input.file_path\"); if [[ \"$file\" =~ \\.(clj|cljc)$ ]]; then ~/.claude/scripts/reload-backend.sh && sleep 2 && ~/.claude/scripts/capture-backend.sh 30; fi'",
-            "timeout": 120
-          }
-        ]
-      }
-    ]
   }
 }

@@ -13,9 +13,15 @@
 - For clojure and clojurescript prefer threading macros to nested function calls.
 
 ## Testing
+- **ALWAYS** start the backend server with `DB_NAME=leihs_test` or `DB_NAME=madek_test` before running the tests with `bin/rspec` or `bin/cucumber`.
 - **ALWAYS** run `bin/rspec` instead of `rspec`
 - **ALWAYS** run `bin/cucumber` instead of `cucumber`
-- **ALWAYS** ensure that the backend server has been restarted with `~/.claude/scripts/reload-backend-test.sh` script.
+- **ALWAYS** run `bin/rblint` when working on Ruby specs
+
+## Git
+- **NEVER** commit automatically.
+- **NEVER** amend last commit automatically.
+- Commit messages: max ~50 chars, imperative, no period, sacrifice grammar for brevity.
 
 ## Fun stuff
 

@@ -1,6 +1,4 @@
 {
-  "alwaysThinkingEnabled": true,
-
   "permissions": {
     "deny": [
       "Read(**/.env.*)",
@@ -17,5 +15,10 @@
       "Read(**/test_claude_permission.txt)",
       "Read(**/transcrypt)"
     ]
-  }
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium",
+  "advisorModel": "opus",
+  "theme": "light",
+  "editorMode": "vim"
 }

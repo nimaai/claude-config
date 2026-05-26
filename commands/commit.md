@@ -39,7 +39,7 @@ Or with options:
     - `test`: Adding or fixing tests
     - `chore`: Changes to the build process, tools, etc.
 - **Present tense, imperative mood**: Write commit messages as commands (e.g., "add feature" not "added feature")
-- **Concise first line**: Keep the first line under 72 characters
+- **50/72 rule**: The 50/72 rule is a widely adopted standard for normalizing the commit message format. 50 refers to the maximum number of characters of the commit message’s subject (or title). Meanwhile, 72 indicates that we should format the body of the message in columns of up to 72 characters.
 
 ## Guidelines for Splitting Commits
 
